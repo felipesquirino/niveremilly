@@ -1,1 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Para Emilly 💗</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;overflow:hidden;touch-action:manipulation}
+body{
+  font-family:Georgia,"Times New Roman",serif;
+  color:#6d4058;
+  background:linear-gradient(180deg,#fff7fb 0%,#ffeaf4 48%,#fff9fc 100%);
+}
+button{font:inherit}
+.hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.heart{position:absolute;bottom:-40px;opacity:.55;animation:floatUp linear infinite}
+@keyframes floatUp{from{transform:translateY(0) rotate(0);opacity:0}15%{opacity:.55}to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
 
+.page{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100dvh;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px 16px;
+  overflow:hidden;
+  z-index:1;
+}
+.page.active{display:flex}
+.card{
+  width:min(1000px,100%);
+  max-height:calc(100dvh - 30px);
+  overflow-y:auto;
+  scrollbar-width:none;
+  text-align:center;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+.card::-webkit-scrollbar{display:none}
+
+.hero{text-align:center}
+.eyebrow{font:600 12px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#c884a5;margin-bottom:14px}
+h1{font-size:clamp(38px,8.5vw,92px);font-weight:400;line-height:.95;color:#a9587e}
+h1 span{display:block;font-size:.55em;margin-top:12px;color:#d58aaa}
+.subtitle{max-width:600px;margin:20px auto;font-size:17px;line-height:1.6}
+.btn{
+  border:0;border-radius:999px;padding:14px 26px;cursor:pointer;
+  background:#d989ab;color:white;box-shadow:0 12px 30px #d989ab44;
+  transition:.25s transform,.25s box-shadow;
+  font-size:15px;
+}
+.btn:active,.btn:hover{transform:scale(0.98);box-shadow:0 10px 25px #d989ab66}
+.section-title{font-size:32px;font-weight:400;color:#a9587e;margin-bottom:8px}
+.section-text{font:14px Arial,sans-serif;color:#9a7184;margin-bottom:16px}
+
+.gallery-wrap{display:flex;align-items:center;justify-content:center;gap:8px;margin:auto;width:100%}
+.gallery{width:min(82vw,360px);height:min(50dvh,420px);overflow:hidden;display:block;padding:0;touch-action:pan-y}
+.photo-card{
+  display:none;width:100%;height:100%;flex:none;
+  border-radius:22px;background:white;padding:8px;
+  box-shadow:0 12px 35px #b96c8d22;position:relative;overflow:hidden;cursor:pointer;
+}
+.photo-card.active{display:block}
+.photo-card img{width:100%;height:100%;object-fit:cover;border-radius:16px;display:block}
+.caption{
+  position:absolute;left:14px;right:14px;bottom:14px;
+  background:#fffffff2;border-radius:14px;padding:12px;
+  font:13px/1.4 Arial,sans-serif;color:#7b5267;
+  transform:translateY(140%);transition:.35s;
+  box-shadow:0 8px 25px #00000012;
+}
+.photo-card.show .caption{transform:translateY(0)}
+.gallery-arrow{
+  width:40px;height:40px;border:0;border-radius:50%;background:#fff;
+  color:#b76588;font-size:30px;line-height:40px;cursor:pointer;
+  box-shadow:0 6px 20px #b96c8d25;transition:.2s;flex:none;
+}
+.gallery-arrow:active{transform:scale(0.92)}
+.photo-counter{font:600 12px Arial,sans-serif;color:#b56f8e;margin-top:8px}
+.swipe-hint{margin-top:8px;font:600 12px Arial,sans-serif;color:#ad7890}
+.mobile-hint{margin-top:4px;font:11px Arial,sans-serif;color:#c19aaa}
+.continue-btn{margin-top:16px}
+
+.letter-box{
+  max-width:760px;width:100%;margin:16px auto 0;background:#fffafc;border:1px solid #f4d6e2;
+  border-radius:22px;padding:22px 18px;box-shadow:0 15px 45px #b96c8d1c;
+}
+.letter-box p{font-size:16px;line-height:1.7;margin-bottom:12px}
+.signature{font-size:19px;color:#bd6f91;margin-top:18px}
+
+.gift-section .card{
+  justify-content:center;
+  align-items:center;
+}
+#giftArea{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  width:100%;
+}
+.gift{border:0;background:none;cursor:pointer;position:relative;transition:.25s transform}
+.gift:active{transform:scale(0.95)}
+.gift-box{font-size:85px;filter:drop-shadow(0 12px 18px #c4779725)}
+.gift-label{display:block;color:#b86589;font-size:18px;margin-top:5px}
+.final{
+  display:none;
+  max-width:720px;
+  width:100%;
+  margin:0 auto;
+  text-align:center;
+  animation:appear .8s ease;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+.final.open{display:flex}
+@keyframes appear{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+.final h2{font-size:32px;font-weight:400;color:#a9587e;margin-bottom:14px}
+.final p{font-size:16px;line-height:1.6}
+.spark{position:fixed;pointer-events:none;z-index:20;font-size:20px;animation:spark .9s ease-out forwards}
+@keyframes spark{to{transform:translate(var(--x),var(--y)) scale(.2);opacity:0}}
+footer{position:fixed;bottom:8px;left:0;right:0;text-align:center;color:#b28a9b;font:10px Arial,sans-serif;z-index:2}
+</style>
+</head>
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<section class="page active hero" id="inicio">
+  <div>
+    <div class="eyebrow">Fiz essa surpresinha para você</div>
+    <h1>Feliz aniversário<span>Emilly Camila 💗</span></h1>
+    <p class="subtitle">Hoje é o seu dia, o dia especial em que você completa duas décadas. Ainda não consegui viver nenhuma com você, mas espero conseguir viver todas as próximas ao seu lado.</p>
+    <button class="btn" onclick="goToSection('fotos')">Clique aqui para a continuação ✨</button>
+  </div>
+</section>
+
+<section class="page" id="fotos">
+  <div class="card">
+    <div class="eyebrow">VOCÊ, A MARAVILHOSA</div>
+    <h2 class="section-title">Felicidades &lt;3</h2>
+    <p class="section-text">Uma foto por vez, para você olhar com carinho.</p>
+
+    <div class="gallery-wrap">
+      <button class="gallery-arrow prev" aria-label="Foto anterior" onclick="changePhoto(-1)">‹</button>
+      <div class="gallery" id="gallery">
+        <article class="photo-card active" onclick="this.classList.toggle('show')">
+          <img src="https://i.imgur.com/QjuqZdD.jpeg" alt="Foto 1">
+          <div class="caption">“Não há nada em você que eu não destaque.”</div>
+        </article>
+        <article class="photo-card" onclick="this.classList.toggle('show')">
+          <img src="https://i.imgur.com/gmMi1K6.jpeg" alt="Foto 2">
+          <div class="caption">“Você me deixa sem palavras.”</div>
+        </article>
+        <article class="photo-card" onclick="this.classList.toggle('show')">
+          <img src="https://i.imgur.com/fcBdTAe.jpeg" alt="Foto 3">
+          <div class="caption">“Não importa como e nem onde.”</div>
+        </article>
+        <article class="photo-card" onclick="this.classList.toggle('show')">
+          <img src="https://i.imgur.com/MKBBI8Y.jpeg" alt="Foto 4">
+          <div class="caption">“O seu cabelo, o seu olhar, o seu sorriso.”</div>
+        </article>
+        <article class="photo-card" onclick="this.classList.toggle('show')">
+          <img src="https://i.imgur.com/aAW9QW7.jpeg" alt="Foto 5">
+          <div class="caption">“O seu tudo, o seu jeito de ser.”</div>
+        </article>
+        <article class="photo-card" onclick="this.classList.toggle('show')">
+          <img src="https://i.imgur.com/3CjLf1y.jpeg" alt="Foto 6">
+          <div class="caption">“Faz-me encantar cada dia mais por você.”</div>
+        </article>
+      </div>
+      <button class="gallery-arrow next" aria-label="Próxima foto" onclick="changePhoto(1)">›</button>
+    </div>
+
+    <div class="photo-counter" id="photoCounter">1 / 6</div>
+    <div class="swipe-hint">← Deslize para o lado para ver mais fotos →</div>
+    <div class="mobile-hint">Toque na foto para ver a legenda.</div>
+    <button class="btn continue-btn" onclick="goToSection('mensagem')">Continuar 💗</button>
+  </div>
+</section>
+
+<section class="page" id="mensagem">
+  <div class="card">
+    <div class="eyebrow">Uma mensagem</div>
+    <h2 class="section-title">Para minha princesa 💌</h2>
+    <div class="letter-box">
+      <p>Emilly, você merece um dia tão especial quanto você é. Meus dias ao seu lado são muito melhores; você me faz bem desde o bom-dia até o boa-noite.</p>
+      <p>Espero que você consiga realizar todos os seus sonhos, que Deus te abençoe sempre e que você tenha um dia maravilhoso.</p>
+      <p>Obrigado por ser essa pessoa incrível e por trazer tanta luz para a minha vida. Que este novo ciclo venha cheio de paz, sorrisos e momentos inesquecíveis ao lado de quem te ama.</p>
+      <div class="signature">Feliz aniversário, minha princesa. ❤️</div>
+    </div>
+    <button class="btn continue-btn" onclick="goToSection('presente')">Tenho mais uma coisa para você 🎁</button>
+  </div>
+</section>
+
+<section class="page gift-section" id="presente">
+  <div class="card">
+    <div id="giftArea">
+      <div class="eyebrow">Mas ainda não acabou...</div>
+      <button class="gift" onclick="openGift()">
+        <div class="gift-box">🎁</div>
+        <span class="gift-label">Abra seu presente 💗</span>
+      </button>
+    </div>
+    <div class="final" id="final">
+      <div class="eyebrow">Uma última coisinha</div>
+      <h2>Para você, Emilly 🌷</h2>
+      <p>Que seu aniversário seja lindo, que seu novo ano seja ainda melhor e que nunca faltem motivos para sorrir.</p>
+      <p style="margin-top:14px">E quem sabe… talvez eu possa estar presente em alguns dos seus próximos momentos especiais. 💗</p>
+      <button class="btn" style="margin-top:22px" onclick="burst(event)">Guardar esse momento ✨</button>
+    </div>
+  </div>
+</section>
+
+<footer id="footer" style="display:none">Feito com carinho, especialmente para a Emilly 💗</footer>
+
+<script>
+  const hearts = document.getElementById('hearts');
+  const symbols = ['♡','♥','✦','✿'];
+  for(let i=0;i<18;i++){
+    const h=document.createElement('span');
+    h.className='heart';
+    h.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+    h.style.left=Math.random()*100+'%';
+    h.style.fontSize=(12+Math.random()*16)+'px';
+    h.style.animationDuration=(6+Math.random()*7)+'s';
+    h.style.animationDelay=(-Math.random()*10)+'s';
+    hearts.appendChild(h);
+  }
+
+  function openGift(){
+    document.getElementById('giftArea').style.display='none';
+    document.getElementById('final').classList.add('open');
+    burst();
+  }
+
+  function burst(e){
+    const x=e?.clientX ?? innerWidth/2, y=e?.clientY ?? innerHeight/2;
+    for(let i=0;i<24;i++){
+      const s=document.createElement('span');
+      s.className='spark';
+      s.textContent=['💗','✨','♡','🌸'][Math.floor(Math.random()*4)];
+      s.style.left=x+'px'; s.style.top=y+'px';
+      s.style.setProperty('--x',(Math.random()*300-150)+'px');
+      s.style.setProperty('--y',(Math.random()*300-150)+'px');
+      document.body.appendChild(s);
+      setTimeout(()=>s.remove(),900);
+    }
+  }
+
+  let currentPhoto = 0;
+  const photos = Array.from(document.querySelectorAll('.photo-card'));
+  const counter = document.getElementById('photoCounter');
+
+  function showPhoto(index){
+    currentPhoto = (index + photos.length) % photos.length;
+    photos.forEach((photo, i) => {
+      photo.classList.toggle('active', i === currentPhoto);
+      photo.classList.remove('show');
+    });
+    counter.textContent = `${currentPhoto + 1} / ${photos.length}`;
+  }
+
+  function changePhoto(direction){
+    showPhoto(currentPhoto + direction);
+  }
+
+  function goToSection(id){
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const target = document.getElementById(id);
+    if(target) target.classList.add('active');
+    document.getElementById('footer').style.display = id === 'presente' ? 'block' : 'none';
+    window.scrollTo(0,0);
+  }
+
+  let touchStartX = null;
+  const gallery = document.getElementById('gallery');
+
+  gallery.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].clientX;
+  }, {passive:true});
+
+  gallery.addEventListener('touchend', e => {
+    if(touchStartX === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if(Math.abs(dx) > 35) changePhoto(dx < 0 ? 1 : -1);
+    touchStartX = null;
+  }, {passive:true});
+
+  let mouseStartX = null;
+  gallery.addEventListener('mousedown', e => {
+    mouseStartX = e.clientX;
+  });
+  window.addEventListener('mouseup', e => {
+    if(mouseStartX === null) return;
+    const dx = e.clientX - mouseStartX;
+    if(Math.abs(dx) > 35 && gallery.contains(e.target)) changePhoto(dx < 0 ? 1 : -1);
+    mouseStartX = null;
+  });
+
+  showPhoto(0);
+</script>
+</body>
+</html>
